@@ -13,9 +13,14 @@ echo
 
 cd "${HOME}"
 
-echo "CLOING: AURIC"
-git clone "https://github.com/rickellis/AURIC.git"
-
+echo "Installing Paru..."
+sudo pacman -S --needed base-devel
+git clone https://aur.archlinux.org/paru.git
+cd paru
+makepkg -si
+cd ..
+echo "Updating Repos..."
+paru -Sy
 
 PKGS=(
 
@@ -26,14 +31,16 @@ PKGS=(
 
     # TERMINAL UTILITIES --------------------------------------------------
 
-    'hyper'                     # Terminal emulator built on Electron
+    'hyper'     
+                    # Terminal emulator built on Electron
 
     # UTILITIES -----------------------------------------------------------
 
-    'dropbox'                   # Cloud file storage
-    'enpass-bin'                # Password manager
+    #'dropbox'                   # Cloud file storage
+    #'enpass-bin'                # Password manager
     'slimlock'                  # Screen locker
     'oomox'                     # Theme editor
+    'google-chrome'             # Google Chrome Browser
 
     # DEVELOPMENT ---------------------------------------------------------
     
@@ -41,17 +48,17 @@ PKGS=(
 
     # MEDIA ---------------------------------------------------------------
 
-    'spotify'                   # Music player
-    'screenkey'                 # Screencast your keypresses
+    #'spotify'                   # Music player
+    #'screenkey'                 # Screencast your keypresses
     # 'aftershotpro3'             # Photo editor
 
     # POST PRODUCTION -----------------------------------------------------
 
-    'peek'                      # GIF animation screen recorder
+    #'peek'                      # GIF animation screen recorder
 
     # COMMUNICATIONS ------------------------------------------------------
 
-    'skypeforlinux-stable-bin'  # Skype
+    #'skypeforlinux-stable-bin'  # Skype
 
     # THEMES --------------------------------------------------------------
 
@@ -65,11 +72,8 @@ PKGS=(
 )
 
 
-cd ${HOME}/AURIC
-chmod +x auric.sh
-
 for PKG in "${PKGS[@]}"; do
-    ./auric.sh -i $PKG
+    paru -S $PKG
 done
 
 echo

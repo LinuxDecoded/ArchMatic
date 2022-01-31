@@ -52,7 +52,7 @@ sudo sed -i 's|initramfs-linux.img|initramfs-linux-lts.img|g' /boot/loader/entri
 # ------------------------------------------------------------------------
 
 echo
-echo "Configuring MAKEPKG to use all 8 cores"
+echo "Configuring MAKEPKG to use all cores"
 
 sudo sed -i -e 's|[#]*MAKEFLAGS=.*|MAKEFLAGS="-j$(nproc)"|g' makepkg.conf
 sudo sed -i -e 's|[#]*COMPRESSXZ=.*|COMPRESSXZ=(xz -c -T 8 -z -)|g' makepkg.conf
@@ -104,20 +104,20 @@ sudo sed -i 's|load-module module-esound-protocol-unix|#load-module module-esoun
 
 # ------------------------------------------------------------------------
 
-echo
-echo "Enabling bluetooth daemon and setting it to auto-start"
-
-sudo sed -i 's|#AutoEnable=false|AutoEnable=true|g' /etc/bluetooth/main.conf
-sudo systemctl enable bluetooth.service
-sudo systemctl start bluetooth.service
+#echo
+#echo "Enabling bluetooth daemon and setting it to auto-start"
+#
+#sudo sed -i 's|#AutoEnable=false|AutoEnable=true|g' /etc/bluetooth/main.conf
+#sudo systemctl enable bluetooth.service
+#sudo systemctl start bluetooth.service
 
 # ------------------------------------------------------------------------
 
-echo
-echo "Enabling the cups service daemon so we can print"
-
-systemctl enable org.cups.cupsd.service
-systemctl start org.cups.cupsd.service
+#echo
+#echo "Enabling the cups service daemon so we can print"
+#
+#systemctl enable org.cups.cupsd.service
+#systemctl start org.cups.cupsd.service
 
 # ------------------------------------------------------------------------
 
